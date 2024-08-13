@@ -6,9 +6,6 @@
 
 This project focuses on the solutions and simulations of orbital motion for bodies under the influence of gravity using various computational techniques. The study explores both idealized and realistic problems, examining the stability, accuracy, and conservation of energy and angular momentum for objects of the same mass.
 
-## 
-The full report on the project can be found in the report pdf within the project repo.
-
 ## Background
 
 The project investigates stable orbital solutions for 2 to 8 bodies under the classical Newtonian gravity regime, with some solutions extendable to any number of bodies. The computational techniques used include:
@@ -26,7 +23,15 @@ The orbital scenarios considered include:
 - **N bodies in a linear chain**
 - **Complex choreographies of 3 bodies**
 
-For all orbit types, the study examines stability and sensitivity to initial conditions. The gravitational constant \( G \) is set to 1 to simplify the differential equations and enhance numerical convergence.
+For all orbit types, the study examines stability and sensitivity to initial conditions. The gravitational constant $G$ is set to 1 to simplify the differential equations and enhance numerical convergence.
+
+
+## A Few Example Graphs Prdocued in Simulation
+
+![Linear chain initial conditions](Orbit_simulation/Report/Pictures/LinearChain_init.png)
+![Linear chain simulated over different timescales](Orbit_simulation/Report/Pictures/LinearChain.png)
+![Gerver 1000 simulation](Orbit_simulation/Report/Pictures/Gerver_10000.png)
+
 
 ## Newtonian Gravity and Differential Equations
 
@@ -36,21 +41,25 @@ The project uses Newtonian gravity, a classical representation of orbits, ignori
 
 The force on a body (1) due to another body (2) is given by:
 
-\[ F_{12} = \frac{Gm_1m_2}{|r_{21}|^3}r_{21} \]
+$$
+F_{12} = \frac{Gm_1m_2}{|r_{21}|^3}r_{21}
+$$
 
 Using Newton's third law and second law, the equation of motion for object 1 becomes:
 
-\[ \frac{d^2r_1}{dt^2} = Gm_2 \left( \frac{r_{21}}{|r_{21}|^3} \right) \]
+$$
+\frac{d^2r_1}{dt^2} = Gm_2 \left( \frac{r_{21}}{|r_{21}|^3} \right)
+$$
 
-This equation can be extended to N bodies by summing their forces.
+This equation can be extended to $N$ bodies by summing their forces.
 
 ### Energy and Angular Momentum
 
 The project also calculates the kinetic energy (KE), potential energy (PE), and angular momentum (L) using:
 
-- \( KE = \frac{1}{2} mv^2 \)
-- \( PE = -\frac{GMm}{r} \)
-- \( L = m(v \times r) \)
+- $KE = \frac{1}{2} mv^2$
+- $PE = -\frac{GMm}{r}$
+- $L = m(v \times r)$
 
 ## Euler's Method
 
@@ -58,12 +67,19 @@ The project also calculates the kinetic energy (KE), potential energy (PE), and 
 
 Euler's method, a simple approach to solving differential equations, is implemented but is prone to instabilities and inaccuracies. The method is based on:
 
-\[ y(t + \Delta t) = y(t) + \Delta t \frac{dy(t)}{dt} \]
+$$
+y(t + \Delta t) = y(t) + \Delta t \frac{dy(t)}{dt}
+$$
 
-For second-order differential equations, position \( r \) and velocity \( v \) are updated at each time step:
+For second-order differential equations, position $r$ and velocity $v$ are updated at each time step:
 
-\[ r(t + \Delta t) = r(t) + \Delta t \cdot \frac{dr(t)}{dt} \]
-\[ v(t + \Delta t) = v(t) + \Delta t \cdot \frac{dv(t)}{dt} \]
+$$
+r(t + \Delta t) = r(t) + \Delta t \cdot \frac{dr(t)}{dt}
+$$
+
+$$
+v(t + \Delta t) = v(t) + \Delta t \cdot \frac{dv(t)}{dt}
+$$
 
 ### Implementation
 
@@ -71,20 +87,25 @@ Euler's method was tested by simulating the orbit of a planet around a fixed cen
 
 ### Inaccuracies and Analysis
 
-The inaccuracies stem from the finite difference approximation, leading to linear increases in energy and angular momentum, which are compounded in more complex dynamics. The global error is of order \( \Delta t \).
+The inaccuracies stem from the finite difference approximation, leading to linear increases in energy and angular momentum, which are compounded in more complex dynamics. The global error is of order $\Delta t$.
 
 ## The Velocity Verlet Method
 
 ### Overview
 
-Velocity Verlet is a more accurate, time-reversible method, conserving energy and angular momentum better than Euler's method. The global error is of order \( (\Delta t)^2 \).
+Velocity Verlet is a more accurate, time-reversible method, conserving energy and angular momentum better than Euler's method. The global error is of order $(\Delta t)^2$.
 
 ### Equations and Implementation
 
 The equations for Velocity Verlet are:
 
-\[ r(t + \Delta t) = r(t) + \Delta t \cdot v(t) + \frac{\Delta t^2}{2m} \cdot F(t) \]
-\[ v(t + \Delta t) = v(t) + \frac{\Delta t}{2m} \cdot \left[ F(t) + F(t + \Delta t) \right] \]
+$$
+r(t + \Delta t) = r(t) + \Delta t \cdot v(t) + \frac{\Delta t^2}{2m} \cdot F(t)
+$$
+
+$$
+v(t + \Delta t) = v(t) + \frac{\Delta t}{2m} \cdot \left[ F(t) + F(t + \Delta t) \right]
+$$
 
 This method was tested on a two-body system with similar masses, resulting in a more stable and accurate simulation compared to Euler's method.
 
@@ -100,7 +121,7 @@ The three-body problem is analytically unsolvable but can be studied numerically
 
 ### Runge Kutta Method
 
-Runge Kutta 4th order, implemented using SciPy's `solve_ivp`, offers a lower global error (\( (\Delta t)^4 \)) but does not conserve energy as well as Velocity Verlet. The method was tested on the S-P-M system.
+Runge Kutta 4th order, implemented using SciPy's `solve_ivp`, offers a lower global error $(\Delta t)^4$ but does not conserve energy as well as Velocity Verlet. The method was tested on the S-P-M system.
 
 ### Energy and Angular Momentum Analysis
 
