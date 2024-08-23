@@ -4,7 +4,7 @@
 
 ### Project Overview
 
-This project focuses on the solutions and simulations of orbital motion for bodies under the influence of gravity using various computational techniques. The study explores both idealized and realistic problems, examining the stability, accuracy, and conservation of energy and angular momentum for objects of the same mass.
+This project focuses on the solutions and simulations of orbital motion for bodies under the influence of gravity using various computational techniques. The study explores both idealized and realistic problems, examining the stability, accuracy, and conservation of energy and angular momentum for objects of the same mass. The full report can be found [here](Orbit_simulation/Report/MidTermComputing.pdf).
 
 ## Background
 
